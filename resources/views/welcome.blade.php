@@ -6,6 +6,7 @@
   <body>
     <div id="app">
         <example-component></example-component>
+        <current-time></current-time>
         asd
     </div>
 
