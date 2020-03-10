@@ -36,4 +36,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the timeclock entries associated with the user.
+     */
+    public function timeclockLog()
+    {
+        return $this->hasMany('App\TimeclockEntries');
+    }
 }

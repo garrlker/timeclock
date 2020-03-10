@@ -16,12 +16,9 @@ class CreateTimeclockEntriesTable extends Migration
     Schema::create('timeclock_entries', function (Blueprint $table) {
       $table->id();
       $table->dateTime('time_in');
-      $table->dateTime('time_out');
-      $table->unsignedBigInteger('user_id');
+      $table->dateTime('time_out')->nullable();
+      $table->foreignId('user_id')->constrained();
       $table->timestamps();
-
-      // Relations
-      $table->foreign('user_id')->references('id')->on('users');
     });
   }
 
