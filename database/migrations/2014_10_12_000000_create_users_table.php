@@ -20,6 +20,8 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->string('timezone');
+            $table->boolean('clocked_in')->default(false);
             $table->timestamps();
         });
     }
