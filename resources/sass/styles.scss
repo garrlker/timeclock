@@ -1,0 +1,46 @@
+html,
+body {
+  // height: 100%;
+  overflow-y: auto !important; // Bulma shows the scrollbar by default, let's change that
+  font-family: 'Inter', 'Roboto', sans-serif;
+}
+
+#app {
+  // height: 100%;
+
+  .hero.is-success {
+    background: #f2f6fa;
+  }
+  .hero-body {
+    background-image: linear-gradient(235deg, #f55f6e, #763eff);
+  }
+
+  .box {
+    margin-top: 5rem;
+    // box-shadow: 0 10px 10px #3d3d3d !important;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22) !important;
+  }
+
+  .entry-table {
+    min-height: 20em;
+  }
+
+  p.subtitle {
+    font-weight: 700;
+    padding-top: 1rem;
+  }
+
+  .title {
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.125;
+  }
+
+  .title-hr {
+    border-bottom: 1px solid #eee;
+  }
+
+  .fa {
+    margin-left: 5px;
+  }
+}
