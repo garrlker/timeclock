@@ -20,6 +20,9 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+
+        /** Logs us in as our hardcoded single user */
+        \App\Http\Middleware\LoginAsGuest::class
     ];
 
     /**
