@@ -18,4 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('timeclock', 'TimeClock@index');
+Route::get('timeclock', 'TimeClock@getEntries');
+Route::get('timeclock/clockin', 'TimeClock@clockIn');
+Route::get('timeclock/clockout', 'TimeClock@clockOut');
+

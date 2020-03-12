@@ -42,6 +42,6 @@ class User extends Authenticatable
      */
     public function timeclockLog()
     {
-        return $this->hasMany('App\TimeclockEntries');
+        return $this->hasMany('App\TimeclockEntry');
     }
 }
