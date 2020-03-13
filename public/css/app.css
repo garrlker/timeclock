@@ -17047,8 +17047,13 @@ body {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22) !important;
 }
 
+#app button::-moz-focus-inner {
+  border: 0;
+}
+
 #app .entry-table {
-  min-height: 20em;
+  height: 20em;
+  overflow-y: auto;
 }
 
 #app p.subtitle {

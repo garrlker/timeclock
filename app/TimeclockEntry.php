@@ -23,7 +23,7 @@ class TimeclockEntry extends Model
    * @var array
    */
   protected $casts = [
-    'time_in' => 'datetime',
-    'time_out' => 'datetime',
+    'time_in' => 'datetime:c',
+    'time_out' => 'datetime:c',
   ];
 }

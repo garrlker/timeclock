@@ -1,4 +1,4 @@
-require('./bootstrap');
+require("./bootstrap");
 
 var Vue = require("vue");
 
@@ -20,40 +20,38 @@ const app = new Vue({
   el: "#app",
   data() {
     return {
-      data: [
-        {
-          clockedIn: "2016-10-15 13:43:27",
-          clockedOut: "2016-10-15 18:43:27"
-        },
-        {
-          clockedIn: "2016-10-15 18:43:27",
-          clockedOut: "2016-04-26 06:26:28"
-        },
-        {
-          clockedIn: "2016-04-26 06:26:28",
-          clockedOut: "2016-04-26 019:26:28"
-        },
-        {
-          clockedIn: "2016-04-26 019:26:28",
-          clockedOut: "2016-12-06 14:38:38"
-        },
-        {
-          clockedIn: "2016-12-06 14:38:38",
-          clockedOut: "2016-12-06 14:38:38"
-        }
-      ],
-      columns: [
-        {
-          field: "clockedIn",
-          label: "In",
-          centered: true
-        },
-        {
-          field: "clockedOut",
-          label: "Out",
-          centered: true
-        }
-      ]
+      user: {
+        clocked_in: false
+      }
     };
+  },
+  methods: {
+    async getUser() {
+      await axios
+        .get("/api/user")
+        .then(res => {
+          this.user = res.data;
+        })
+        .catch(err => {
+          throw err;
+        })
+        .then(() => console.log("Fetched User"));
+    },
+    async setTimezone(timezone) {
+      await axios
+        .post("/api/user/updateTimezone", {
+          timezone
+        })
+        .then(res => {
+          this.user = res.data;
+        })
+        .catch(err => {
+          throw err;
+        })
+        .then(() => console.log("Updated Timezone"));
+    }
+  },
+  async mounted() {
+    this.getUser();
   }
 });

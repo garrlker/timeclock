@@ -14,11 +14,46 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+
+Route::group(['prefix' => '/user'], function () {
+
+  /**
+   * Get user
+   *
+   * @uses Route::get()
+   * @example /api/user
+   * @param Request $request
+   */
+  Route::get('/', function (Request $request) {
     return $request->user();
+  });
+
+  /**
+   * Update user's timezone
+   *
+   * @uses Route::post()
+   * @example /api/user/updateTimezone
+   * @param Request $request
+   */
+  Route::post('/updateTimezone', function (Request $request) {
+    $user = $request->user();
+    $newTimezone = $request->input('timezone');
+
+    if ($newTimezone == null) {
+      return response()->json([
+        'error' => 'Bad Request: No Timezone in request'
+      ]);
+    }
+
+    // Update user timezone and return user data
+    $user->timezone = $newTimezone;
+    $user->save();
+    return $request->user();
+  });
 });
 
-Route::get('timeclock', 'TimeClock@getEntries');
-Route::get('timeclock/clockin', 'TimeClock@clockIn');
-Route::get('timeclock/clockout', 'TimeClock@clockOut');
-
+Route::group(['prefix' => '/timeclock'], function () {
+  Route::get('/', 'TimeClock@getEntries');
+  Route::post('/clockin', 'TimeClock@clockIn');
+  Route::post('/clockout', 'TimeClock@clockOut');
+});

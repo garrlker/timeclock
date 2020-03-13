@@ -3,6 +3,7 @@
 
 <head>
   <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
 
 <body>
@@ -14,16 +15,9 @@
             <h3 class="title has-text-white">TimeClock</h3>
             <hr class="title-hr" />
             <p class="subtitle has-text-white">
-              <current-time @bla="$emit('asd')"/>
+              <current-time @timezone="setTimezone"/>
             </p>
-            <div class="box">
-              <div class="entry-table">
-                <b-table :data="data" :columns="columns" sticky-header></b-table>
-              </div>
-            </div>
-            <button class="button is-block is-warning is-large is-fullwidth">
-              Clock In <i class="fa fa-sign-in" aria-hidden="true"></i>
-            </button>
+            <time-table :user="user" v-model="user['clocked_in']"/>
           </div>
         </div>
       </div>
@@ -32,9 +26,6 @@
 
   <!-- Scripts -->
   <script src="{{ mix('js/app.js') }}"></script>
-  <script>
-
-  </script>
 </body>
 
 </html>

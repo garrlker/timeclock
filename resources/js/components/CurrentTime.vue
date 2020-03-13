@@ -1,10 +1,7 @@
 <template>
   <div>
     <!-- DD-MM  H:m -->
-    {{
-      paddedDay +
-        currentTime.format("-{iso-month} {hour}:{minute-pad}")
-    }}
+    {{ time ? time.unixFmt("dd-MM  h:mm a") : "" }}
   </div>
 </template>
 
@@ -15,25 +12,23 @@ export default {
   name: "CurrentTime",
   data() {
     return {
-      currentTime: ""
+      time: ""
     };
   },
-  computed: {
-    paddedDay() {
-      var len = String(this.currentTime.date()).length;
-      var date = this.currentTime.date();
-      return len === 2 ? date : "0" + date;
+  methods: {
+    getCurrentTime() {
+      this.time = spacetime.now();
     }
+  },
+  created() {
+    this.$intervalID = setInterval(this.getCurrentTime, 1000);
+  },
+  mounted() {
+    this.getCurrentTime();
+    this.$emit("timezone", spacetime.now().timezone().name);
   },
   beforeDestroy() {
     clearInterval(this.$intervalID);
-  },
-  created() {
-    var getTime = () => (this.currentTime = spacetime.now());
-    this.$intervalID = setInterval(getTime, 1000);
-    getTime();
   }
 };
 </script>
-
-<style scoped lang="scss"></style>
